@@ -9,7 +9,6 @@ const Dashboard = () => {
   const handleSubmit = (data) => {
     setLoading(true);
 
-    // smooth UX delay
     setTimeout(() => {
       setResult(data);
       setLoading(false);
@@ -23,8 +22,8 @@ const Dashboard = () => {
 
         body {
           margin: 0;
-          background: linear-gradient(135deg, #0f172a, #1e293b);
           font-family: "Inter", sans-serif;
+          background: radial-gradient(circle at top right, #1e3a8a, #020617);
         }
 
         .dashboard-wrapper {
@@ -34,24 +33,28 @@ const Dashboard = () => {
         }
 
         .container {
-          max-width: 1100px;
+          max-width: 1200px;
           margin: auto;
         }
 
         .navbar {
-          background: #1e293b;
+          background: rgba(255,255,255,0.05);
+          backdrop-filter: blur(20px);
           padding: 24px 32px;
-          border-radius: 14px;
+          border-radius: 16px;
           margin-bottom: 32px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+          box-shadow: 0 10px 40px rgba(0,0,0,0.6);
           text-align: center;
+          border: 1px solid rgba(255,255,255,0.1);
         }
 
         .title {
           margin: 0;
-          font-size: 28px;
+          font-size: 30px;
           font-weight: 800;
-          color: #ffffff;
+          background: linear-gradient(to right, #38bdf8, #6366f1);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
         }
 
         .subtitle {
@@ -67,22 +70,31 @@ const Dashboard = () => {
         }
 
         .card {
-          background: #1e293b;
-          border-radius: 14px;
+          background: rgba(255,255,255,0.05);
+          backdrop-filter: blur(20px);
+          border-radius: 16px;
           padding: 28px;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+          border: 1px solid rgba(255,255,255,0.1);
+          box-shadow: 0 10px 30px rgba(0,0,0,0.5);
           transition: all 0.3s ease;
         }
 
         .card:hover {
-          transform: translateY(-4px);
-          box-shadow: 0 15px 40px rgba(0,0,0,0.6),
-                      0 0 20px rgba(59, 130, 246, 0.2);
+          transform: translateY(-6px) scale(1.01);
+          box-shadow: 0 20px 50px rgba(0,0,0,0.8),
+                      0 0 30px rgba(59,130,246,0.3);
         }
 
         .loading {
           text-align: center;
           color: #94a3b8;
+          animation: pulse 1.2s infinite;
+        }
+
+        @keyframes pulse {
+          0% { opacity: 0.5; }
+          50% { opacity: 1; }
+          100% { opacity: 0.5; }
         }
 
         @media (max-width: 768px) {
@@ -93,27 +105,23 @@ const Dashboard = () => {
       `}</style>
 
       <div className="container">
-        
-        {/* NAVBAR */}
+
         <div className="navbar">
-          <h1 className="title">Smart Logistics</h1>
+          <h1 className="title">🚀 Smart Logistics</h1>
           <p className="subtitle">
             AI-powered disruption prediction & route optimization
           </p>
         </div>
 
-        {/* MAIN GRID */}
         <div className="grid">
-          
-          {/* FORM */}
+
           <div className="card">
             <RouteForm onSubmit={handleSubmit} />
           </div>
 
-          {/* RESULT */}
           <div className="card">
             {loading ? (
-              <p className="loading">Analyzing...</p>
+              <p className="loading">⚡ Analyzing smart route...</p>
             ) : (
               <ResultCard result={result} />
             )}
